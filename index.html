@@ -162,19 +162,18 @@
             height: 100%;
         }
 
-        .toggle-checkbox:checked { right: 0; border-color: var(--accent); }
-        .toggle-checkbox:checked + .toggle-label { background-color: var(--accent); }
+        /* トグルスイッチの丸（●）のアニメーション */
+        .toggle-checkbox:checked + .toggle-label { 
+            background-color: var(--accent); 
+            border-color: var(--accent);
+        }
+        .toggle-checkbox:checked ~ .dot { 
+            transform: translateX(1rem); 
+            background-color: #ffffff; 
+        }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-        /* シャッフル有効時の白い光るエフェクト */
-        .shuffle-active {
-            border-color: #ffffff !important;
-            color: #ffffff !important;
-            box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-        }
 
         /* ダブルタップスキップのアニメーション */
         @keyframes rippleEffect {
@@ -256,9 +255,10 @@
                     </div>
                     
                     <div id="userMenuDropdown" class="hidden absolute right-0 top-full mt-3 w-48 bg-brandSurface border border-brandBorder rounded-xl shadow-2xl py-2 z-50 origin-top-right">
-                        <a href="javascript:void(0)" onclick="closeUserMenu(); showToast('マイページ機能は現在準備中です');" class="block px-4 py-3 text-xs font-bold text-brandText hover:bg-brandBg transition-colors flex items-center gap-2.5"><i data-lucide="layout-dashboard" class="w-4 h-4 text-brandMuted"></i> マイページ</a>
+                        <a href="javascript:void(0)" onclick="closeUserMenu(); showToast('マイページ機能は現在準備中です', 'system');" class="block px-4 py-3 text-xs font-bold text-brandText hover:bg-brandBg transition-colors flex items-center gap-2.5"><i data-lucide="layout-dashboard" class="w-4 h-4 text-brandMuted"></i> マイページ</a>
                         <a href="javascript:void(0)" onclick="closeUserMenu(); openHistoryModal();" class="block px-4 py-3 text-xs font-bold text-brandText hover:bg-brandBg transition-colors flex items-center gap-2.5"><i data-lucide="history" class="w-4 h-4 text-brandMuted"></i> 視聴履歴</a>
                         <a href="javascript:void(0)" onclick="closeUserMenu(); openWatchLaterModal();" class="block px-4 py-3 text-xs font-bold text-brandText hover:bg-brandBg transition-colors flex items-center gap-2.5"><i data-lucide="bookmark" class="w-4 h-4 text-brandMuted"></i> あとで見る</a>
+                        <a href="javascript:void(0)" onclick="closeUserMenu(); openNotificationSettingsModal();" class="block px-4 py-3 text-xs font-bold text-brandText hover:bg-brandBg transition-colors flex items-center gap-2.5"><i data-lucide="bell" class="w-4 h-4 text-brandMuted"></i> 通知設定</a>
                         <a href="javascript:void(0)" onclick="closeUserMenu(); showShortcutsModal();" class="block px-4 py-3 text-xs font-bold text-brandText hover:bg-brandBg transition-colors flex items-center gap-2.5"><i data-lucide="keyboard" class="w-4 h-4 text-brandMuted"></i> ショートカット</a>
                         
                         <hr class="border-brandBorder my-2 opacity-50">
@@ -379,12 +379,6 @@
                     </h2>
                     
                     <div class="flex items-center gap-2">
-                        <!-- シャッフル再生ボタン -->
-                        <button onclick="toggleShuffle()" id="shuffleBtn" class="text-[11px] text-brandMuted bg-brandSurface px-3 py-2 rounded-xl border border-brandBorder transition-all duration-300 flex items-center gap-1.5 font-bold active:scale-95" title="シャッフル再生切替">
-                            <i data-lucide="shuffle" class="w-3.5 h-3.5"></i>
-                            <span>シャッフル</span>
-                        </button>
-
                         <!-- ソート順切り替えドロップダウン -->
                         <div class="relative">
                             <button onclick="toggleSortDropdown(event)" id="sortBtn" class="text-[11px] text-brandMuted hover:text-brandText bg-brandSurface px-3 py-2 rounded-xl border border-brandBorder transition-colors flex items-center gap-1.5 font-bold active:scale-95">
@@ -455,42 +449,16 @@
                         <div class="relative">
                             <input type="checkbox" id="config-autoPlay" class="sr-only toggle-checkbox" checked onchange="updateAppConfig('autoPlay', this.checked)">
                             <div class="block bg-brandSurface border border-brandBorder w-10 h-6 rounded-full transition toggle-label"></div>
-                            <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"></div>
+                            <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200"></div>
                         </div>
                     </label>
                 </div>
 
                 <div class="flex items-center justify-between p-3 border border-brandBorder rounded bg-brandBg h-11">
-                    <span class="text-xs font-bold text-brandText">連続再生 (終了後)</span>
-                    <label class="flex items-center cursor-pointer">
-                        <div class="relative">
-                            <input type="checkbox" id="config-autoNext" class="sr-only toggle-checkbox" onchange="updateAppConfig('autoNext', this.checked)">
-                            <div class="block bg-brandSurface border border-brandBorder w-10 h-6 rounded-full transition toggle-label"></div>
-                            <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"></div>
-                        </div>
-                    </label>
-                </div>
-
-                <div class="flex items-center justify-between p-3 border border-brandBorder rounded bg-brandBg h-11">
-                    <span class="text-xs font-bold text-brandText">動画ループ</span>
-                    <label class="flex items-center cursor-pointer">
-                        <div class="relative">
-                            <input type="checkbox" id="config-loop" class="sr-only toggle-checkbox" onchange="updateAppConfig('loop', this.checked)">
-                            <div class="block bg-brandSurface border border-brandBorder w-10 h-6 rounded-full transition toggle-label"></div>
-                            <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"></div>
-                        </div>
-                    </label>
-                </div>
-
-                <div class="flex items-center justify-between p-3 border border-brandBorder rounded bg-brandBg h-11">
-                    <span class="text-xs font-bold text-brandText">シャッフル再生</span>
-                    <label class="flex items-center cursor-pointer">
-                        <div class="relative">
-                            <input type="checkbox" id="config-shuffle" class="sr-only toggle-checkbox" onchange="updateAppConfig('shuffle', this.checked)">
-                            <div class="block bg-brandSurface border border-brandBorder w-10 h-6 rounded-full transition toggle-label"></div>
-                            <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"></div>
-                        </div>
-                    </label>
+                    <span class="text-xs font-bold text-brandText">通知設定を開く</span>
+                    <button onclick="closeSettings(); openNotificationSettingsModal();" class="text-xs bg-brandSurface border border-brandBorder hover:border-brandAccent text-brandText px-3 py-1.5 rounded-lg font-bold transition">
+                        設定
+                    </button>
                 </div>
             </div>
 
@@ -498,6 +466,129 @@
                 <button onclick="closeSettings()" class="px-6 py-3 bg-brandAccent hover:bg-brandAccentHover text-white rounded-full transition text-sm font-bold shadow-lg shadow-brandAccent/30">
                     閉じる
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 通知個別詳細設定モーダル (検索＆スワイプ対応) -->
+    <div id="notificationSettingsModal" class="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4 hidden">
+        <div class="bg-brandSurface border border-brandBorder rounded-theme max-w-md w-full max-h-[85vh] flex flex-col p-6 shadow-2xl">
+            <div class="flex justify-between items-center pb-3 border-b border-brandBorder flex-shrink-0">
+                <h3 class="text-lg font-bold text-brandText flex items-center gap-2"><i data-lucide="bell" class="text-brandAccent"></i><span>通知設定（個別切り替え）</span></h3>
+                <button onclick="closeNotificationSettingsModal()" class="text-brandMuted hover:text-brandText transition-colors p-2"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            
+            <!-- 検索バー -->
+            <div class="mt-3 relative flex items-center flex-shrink-0">
+                <i data-lucide="search" class="w-4 h-4 text-brandMuted absolute left-3.5 pointer-events-none"></i>
+                <input type="text" id="notifSearchInput" oninput="filterNotificationItems()" placeholder="通知項目を検索..." 
+                       class="w-full bg-brandBg border border-brandBorder rounded-xl pl-10 pr-9 py-2.5 text-xs text-brandText placeholder-brandMuted focus:border-brandAccent focus:outline-none transition-colors">
+                <button id="notifSearchClearBtn" onclick="clearNotifSearch()" class="hidden absolute right-3 text-brandMuted hover:text-brandText transition-colors p-1">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <!-- スワイプ・スクロール可能エリア -->
+            <div id="notifItemsContainer" class="overflow-y-auto flex-grow my-3 space-y-3 scrollbar-thin max-h-[50vh] pr-1">
+                
+                <!-- 1. 再生速度の変更 -->
+                <div class="notif-item flex items-center justify-between p-3 bg-brandBg rounded-xl border border-brandBorder" data-title="再生速度の変更" data-desc="速度を変更した際の通知">
+                    <div>
+                        <p class="text-xs font-bold text-brandText">再生速度の変更</p>
+                        <p class="text-[10px] text-brandMuted">速度を変更した際の通知</p>
+                    </div>
+                    <label class="flex items-center cursor-pointer">
+                        <div class="relative">
+                            <input type="checkbox" id="notif-playbackRate" class="sr-only toggle-checkbox" checked onchange="updateNotificationCategory('playbackRate', this.checked)">
+                            <div class="block bg-brandSurface border border-brandBorder w-10 h-6 rounded-full transition toggle-label"></div>
+                            <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200"></div>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- 2. 共有・リンクコピー完了 -->
+                <div class="notif-item flex items-center justify-between p-3 bg-brandBg rounded-xl border border-brandBorder" data-title="共有・リンクコピー完了" data-desc="共有メニュー起動、URLコピー完了通知">
+                    <div>
+                        <p class="text-xs font-bold text-brandText">共有・リンクコピー完了</p>
+                        <p class="text-[10px] text-brandMuted">共有メニュー起動、URLコピー完了通知</p>
+                    </div>
+                    <label class="flex items-center cursor-pointer">
+                        <div class="relative">
+                            <input type="checkbox" id="notif-share" class="sr-only toggle-checkbox" checked onchange="updateNotificationCategory('share', this.checked)">
+                            <div class="block bg-brandSurface border border-brandBorder w-10 h-6 rounded-full transition toggle-label"></div>
+                            <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200"></div>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- 3. 「あとで見る」追加・削除 -->
+                <div class="notif-item flex items-center justify-between p-3 bg-brandBg rounded-xl border border-brandBorder" data-title="「あとで見る」追加・削除" data-desc="リスト追加、削除操作の完了通知">
+                    <div>
+                        <p class="text-xs font-bold text-brandText">「あとで見る」追加・削除</p>
+                        <p class="text-[10px] text-brandMuted">リスト追加、削除操作の完了通知</p>
+                    </div>
+                    <label class="flex items-center cursor-pointer">
+                        <div class="relative">
+                            <input type="checkbox" id="notif-watchLater" class="sr-only toggle-checkbox" checked onchange="updateNotificationCategory('watchLater', this.checked)">
+                            <div class="block bg-brandSurface border border-brandBorder w-10 h-6 rounded-full transition toggle-label"></div>
+                            <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200"></div>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- 4. 視聴履歴の消去 -->
+                <div class="notif-item flex items-center justify-between p-3 bg-brandBg rounded-xl border border-brandBorder" data-title="視聴履歴の消去" data-desc="履歴クリア操作の完了通知">
+                    <div>
+                        <p class="text-xs font-bold text-brandText">視聴履歴の消去</p>
+                        <p class="text-[10px] text-brandMuted">履歴クリア操作の完了通知</p>
+                    </div>
+                    <label class="flex items-center cursor-pointer">
+                        <div class="relative">
+                            <input type="checkbox" id="notif-historyClear" class="sr-only toggle-checkbox" checked onchange="updateNotificationCategory('historyClear', this.checked)">
+                            <div class="block bg-brandSurface border border-brandBorder w-10 h-6 rounded-full transition toggle-label"></div>
+                            <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200"></div>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- 5. 続きから再生（レジューム） -->
+                <div class="notif-item flex items-center justify-between p-3 bg-brandBg rounded-xl border border-brandBorder" data-title="続きから再生（レジューム）" data-desc="前回停止位置からの再開通知">
+                    <div>
+                        <p class="text-xs font-bold text-brandText">続きから再生（レジューム）</p>
+                        <p class="text-[10px] text-brandMuted">前回停止位置からの再開通知</p>
+                    </div>
+                    <label class="flex items-center cursor-pointer">
+                        <div class="relative">
+                            <input type="checkbox" id="notif-resume" class="sr-only toggle-checkbox" checked onchange="updateNotificationCategory('resume', this.checked)">
+                            <div class="block bg-brandSurface border border-brandBorder w-10 h-6 rounded-full transition toggle-label"></div>
+                            <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200"></div>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- 6. その他（ログアウト・エラー等） -->
+                <div class="notif-item flex items-center justify-between p-3 bg-brandBg rounded-xl border border-brandBorder" data-title="その他（ログアウト・エラー等）" data-desc="ログアウト、準備中メッセージ、警告等">
+                    <div>
+                        <p class="text-xs font-bold text-brandText">その他（ログアウト・エラー等）</p>
+                        <p class="text-[10px] text-brandMuted">ログアウト、準備中メッセージ、警告等</p>
+                    </div>
+                    <label class="flex items-center cursor-pointer">
+                        <div class="relative">
+                            <input type="checkbox" id="notif-system" class="sr-only toggle-checkbox" checked onchange="updateNotificationCategory('system', this.checked)">
+                            <div class="block bg-brandSurface border border-brandBorder w-10 h-6 rounded-full transition toggle-label"></div>
+                            <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200"></div>
+                        </div>
+                    </label>
+                </div>
+
+                <div id="noNotifMatchMsg" class="hidden text-center py-6 text-brandMuted text-xs font-bold">
+                    一致する通知項目が見つかりません
+                </div>
+            </div>
+
+            <div class="pt-3 border-t border-brandBorder flex gap-2 flex-shrink-0">
+                <button onclick="setAllNotifications(false)" class="w-1/2 py-3 bg-brandBg border border-brandBorder hover:border-brandAccent text-brandMuted hover:text-brandText rounded-xl text-xs font-bold transition-all min-h-[44px]">すべてOFF</button>
+                <button onclick="setAllNotifications(true)" class="w-1/2 py-3 bg-brandAccent hover:bg-brandAccentHover text-white rounded-xl text-xs font-bold transition-all shadow-lg min-h-[44px]">すべてON</button>
             </div>
         </div>
     </div>
@@ -655,12 +746,18 @@
 
     <!-- アプリメインロジック -->
     <script>
+        const notificationSettings = getStoredData('cinemastream_notifications_config', {
+            playbackRate: true,
+            share: true,
+            watchLater: true,
+            historyClear: true,
+            resume: true,
+            system: true
+        });
+
         const appConfig = {
             playbackRate: 1.0,
-            autoPlay: true, 
-            autoNext: false, 
-            loop: false,
-            shuffle: false
+            autoPlay: true
         };
 
         let searchQuery = "";
@@ -669,44 +766,83 @@
         let pendingResumeTime = 0;
         let controlsTimeout = null;
 
+        function updateNotificationCategory(category, value) {
+            notificationSettings[category] = value;
+            setStoredData('cinemastream_notifications_config', notificationSettings);
+        }
+
+        function filterNotificationItems() {
+            const input = document.getElementById('notifSearchInput');
+            const clearBtn = document.getElementById('notifSearchClearBtn');
+            const query = input.value.trim().toLowerCase();
+            const items = document.querySelectorAll('.notif-item');
+            let matchCount = 0;
+
+            if (query.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+
+            items.forEach(item => {
+                const title = item.getAttribute('data-title') ? item.getAttribute('data-title').toLowerCase() : '';
+                const desc = item.getAttribute('data-desc') ? item.getAttribute('data-desc').toLowerCase() : '';
+                
+                if (title.includes(query) || desc.includes(query)) {
+                    item.classList.remove('hidden');
+                    item.classList.add('flex');
+                    matchCount++;
+                } else {
+                    item.classList.add('hidden');
+                    item.classList.remove('flex');
+                }
+            });
+
+            const noMatchMsg = document.getElementById('noNotifMatchMsg');
+            if (matchCount === 0) {
+                noMatchMsg.classList.remove('hidden');
+            } else {
+                noMatchMsg.classList.add('hidden');
+            }
+        }
+
+        function clearNotifSearch() {
+            const input = document.getElementById('notifSearchInput');
+            input.value = '';
+            filterNotificationItems();
+        }
+
+        function setAllNotifications(enable) {
+            const categories = ['playbackRate', 'share', 'watchLater', 'historyClear', 'resume', 'system'];
+            categories.forEach(cat => {
+                notificationSettings[cat] = enable;
+                const checkbox = document.getElementById(`notif-${cat}`);
+                if (checkbox) checkbox.checked = enable;
+            });
+            setStoredData('cinemastream_notifications_config', notificationSettings);
+            showToast(enable ? "すべての通知をONにしました" : "すべての通知をOFFにしました", "system");
+        }
+
+        function openNotificationSettingsModal() {
+            const categories = ['playbackRate', 'share', 'watchLater', 'historyClear', 'resume', 'system'];
+            categories.forEach(cat => {
+                const checkbox = document.getElementById(`notif-${cat}`);
+                if (checkbox) checkbox.checked = !!notificationSettings[cat];
+            });
+            clearNotifSearch();
+            document.getElementById('notificationSettingsModal').classList.remove('hidden');
+        }
+
+        function closeNotificationSettingsModal() {
+            document.getElementById('notificationSettingsModal').classList.add('hidden');
+        }
+
         function updateAppConfig(key, value) {
             appConfig[key] = value;
             if (key === 'playbackRate' && player) {
                 player.playbackRate = value;
-                showToast(`再生速度を ${value}x に変更しました`);
+                showToast(`再生速度を ${value}x に変更しました`, 'playbackRate');
             }
-            if (key === 'loop' && player) {
-                player.loop = value;
-                if(value) {
-                    appConfig.autoNext = false;
-                    document.getElementById('config-autoNext').checked = false;
-                }
-                showToast(value ? "ループ再生: ON" : "ループ再生: OFF");
-            }
-            if (key === 'autoNext' && value) {
-                appConfig.loop = false;
-                document.getElementById('config-loop').checked = false;
-                if(player) player.loop = false;
-                showToast("連続再生: ON");
-            }
-            if (key === 'shuffle') {
-                const shuffleBtn = document.getElementById('shuffleBtn');
-                const checkbox = document.getElementById('config-shuffle');
-                if (checkbox) checkbox.checked = value;
-                
-                if (value) {
-                    shuffleBtn.classList.add('shuffle-active');
-                    showToast("シャッフル再生: ON");
-                } else {
-                    shuffleBtn.classList.remove('shuffle-active');
-                    showToast("シャッフル再生: OFF");
-                }
-            }
-        }
-
-        function toggleShuffle() {
-            const current = appConfig.shuffle;
-            updateAppConfig('shuffle', !current);
         }
 
         const dummyLocalDB = [
@@ -926,7 +1062,7 @@
             document.getElementById('loginBtnContainer').classList.remove('hidden');
             document.getElementById('loginError').classList.add('hidden');
             
-            showToast("ログアウトしました");
+            showToast("ログアウトしました", "system");
         }
 
         document.addEventListener('click', (e) => {
@@ -997,7 +1133,7 @@
             userWatchHistory = [];
             saveUserDataToCloud();
             openHistoryModal();
-            showToast("視聴履歴を消去しました");
+            showToast("視聴履歴を消去しました", "historyClear");
         }
 
         function toggleWatchLater() {
@@ -1005,10 +1141,10 @@
             const index = userWatchLater.indexOf(activeId);
             if (index >= 0) {
                 userWatchLater.splice(index, 1);
-                showToast("「あとで見る」から削除しました");
+                showToast("「あとで見る」から削除しました", "watchLater");
             } else {
                 userWatchLater.push(activeId);
-                showToast("「あとで見る」に追加しました");
+                showToast("「あとで見る」に追加しました", "watchLater");
             }
             saveUserDataToCloud();
             updateWatchLaterBtnUI();
@@ -1064,7 +1200,7 @@
                 saveUserDataToCloud();
                 openWatchLaterModal();
                 updateWatchLaterBtnUI();
-                showToast("リストから削除しました");
+                showToast("リストから削除しました", "watchLater");
             }
         }
 
@@ -1177,7 +1313,6 @@
             updateVolumeBarUI(100);
             
             player.playbackRate = appConfig.playbackRate;
-            player.loop = appConfig.loop;
         }
 
         function formatHashtags(text) {
@@ -1208,7 +1343,6 @@
             player.load();
             
             player.playbackRate = appConfig.playbackRate;
-            player.loop = appConfig.loop;
             
             vTitle.textContent = v.title;
             vDate.textContent = `公開日: ${v.date}`;
@@ -1233,7 +1367,7 @@
             document.getElementById('resumeModal').classList.add('hidden');
             if (shouldResume && pendingResumeTime > 0) {
                 player.currentTime = pendingResumeTime;
-                showToast(`続きから再生 (${formatTime(pendingResumeTime)})`);
+                showToast(`続きから再生 (${formatTime(pendingResumeTime)})`, 'resume');
             } else {
                 player.currentTime = 0;
             }
@@ -1260,7 +1394,6 @@
         function skipTime(seconds) {
             if (!player || isNaN(player.duration)) return;
             player.currentTime = Math.min(Math.max(player.currentTime + seconds, 0), player.duration);
-            showToast(seconds > 0 ? `+${seconds}秒` : `${seconds}秒`);
             resetControlsTimeout();
         }
 
@@ -1272,23 +1405,21 @@
             const theaterBtn = document.getElementById("theaterBtn");
 
             if (isTheaterMode) {
-                // 大画面（1カラム化）: プレイヤーカラムを全幅(col-span-3)へ組み替え
                 grid.classList.remove("max-w-6xl");
                 grid.classList.add("max-w-7xl");
                 playerCol.classList.remove("lg:col-span-2");
                 playerCol.classList.add("lg:col-span-3");
                 
                 theaterBtn.innerHTML = `<i data-lucide="rectangle-vertical" class="w-5 h-5 text-brandAccent"></i>`;
-                showToast("大画面モード: ON");
+                showToast("大画面モード: ON", 'system');
             } else {
-                // 通常モード（2カラム化）に戻す
                 grid.classList.remove("max-w-7xl");
                 grid.classList.add("max-w-6xl");
                 playerCol.classList.remove("lg:col-span-3");
                 playerCol.classList.add("lg:col-span-2");
                 
                 theaterBtn.innerHTML = `<i data-lucide="rectangle-horizontal" class="w-5 h-5"></i>`;
-                showToast("大画面モード: OFF");
+                showToast("大画面モード: OFF", 'system');
             }
             lucide.createIcons();
         }
@@ -1298,11 +1429,11 @@
             if (navigator.share) {
                 try {
                     await navigator.share({ title: "ななにー流出", text: "ななにー流出", url: finalShareUrl });
-                    showToast("共有メニューを開きました");
+                    showToast("共有メニューを開きました", 'share');
                 } catch (error) {}
             } else {
                 const temp = document.createElement("input"); temp.value = finalShareUrl; document.body.appendChild(temp); temp.select(); document.execCommand("copy"); document.body.removeChild(temp);
-                showToast("リンクをコピーしました");
+                showToast("リンクをコピーしました", 'share');
             }
         }
 
@@ -1329,7 +1460,7 @@
                 const a = document.createElement("a"); a.href = blobUrl; a.download = v.url.substring(v.url.lastIndexOf('/') + 1) || `video_${activeId}.mp4`;
                 document.body.appendChild(a); a.click(); document.body.removeChild(a);
                 setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
-                showToast("ダウンロード開始");
+                showToast("ダウンロード開始", 'system');
             } catch (e) {
                 openDownloadModal(v.url);
             } finally {
@@ -1588,7 +1719,8 @@
             updateVolumeIcon();
         }
 
-        function showToast(msg) {
+        function showToast(msg, category = 'system') {
+            if (category && notificationSettings[category] === false) return;
             const t = document.getElementById("toast");
             document.getElementById("toastMsg").textContent = msg;
             t.classList.remove("translate-y-10", "opacity-0", "pointer-events-none");
@@ -1617,7 +1749,7 @@
                 try {
                     await player.requestPictureInPicture();
                 } catch (err) {
-                    showToast("PiPに対応していません");
+                    showToast("PiPに対応していません", 'system');
                 }
             }
         }
@@ -1659,26 +1791,8 @@
             player.onended = () => {
                 delete userResumeTimes[activeId];
                 saveUserDataToCloud();
-
-                if (!appConfig.loop && appConfig.autoNext) {
-                    let nextId;
-                    if (appConfig.shuffle) {
-                        const otherVideos = videos.filter(v => v.id !== activeId);
-                        const randomVideo = otherVideos[Math.floor(Math.random() * otherVideos.length)];
-                        nextId = randomVideo ? randomVideo.id : activeId;
-                    } else {
-                        let currentIndex = videos.findIndex(v => v.id === activeId);
-                        let nextIndex = (currentIndex + 1) % videos.length; 
-                        nextId = videos[nextIndex].id;
-                    }
-                    showToast("次の動画を再生します...");
-                    setTimeout(() => {
-                        loadVideo(nextId);
-                    }, 1500);
-                } else if (!appConfig.loop) {
-                    playBtn.innerHTML = `<i data-lucide="play" class="w-6 h-6 fill-current"></i>`;
-                    lucide.createIcons();
-                }
+                playBtn.innerHTML = `<i data-lucide="play" class="w-6 h-6 fill-current"></i>`;
+                lucide.createIcons();
                 resetControlsTimeout();
             };
 
