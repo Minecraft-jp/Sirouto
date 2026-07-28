@@ -849,13 +849,12 @@
             { username: "櫻井結太", password: "7k#B9vP2@mR5zLwQ" },
             { username: "髙橋浬", password: "HK~kEf|zFji,MU8U/4$$a2R8Ruu$!7" },
             { username: "ピンゴリ", password: "Pingoli" },
-            { username: "とある人", password: "Jk9-mP3*zL5#bR7$w" },
-            { username: "れおん", password: "Daigo" }
+            { username: "とある人", password: "Jk9-mP3*zL5#bR7$w" }
         ];
 
         const externalLinks = [
-            { no: 1, title: "Na-Na-Ni", url: "https://minecraft-jp.github.io/Nanani-URL-Shortener/", icon: "", color: "white", borderColor: "#ec4899" },
-            { no: 2, title: "素人", url: "https://minecraft-jp.github.io/Sirouto/", icon: "user", color: "white", borderColor: "#ec4899" }
+             { no: 1, title: "Na-Na-Ni", url: "https://minecraft-jp.github.io/Nanani-URL-Shortener/", icon: "", color: "orange-500", borderColor: "#ec4899" },
+           { no: 2, title: "素人", url: "https://minecraft-jp.github.io/Sirouto/", icon: "", color: "pink-500", borderColor: "#ec4899" }
         ];
 
         function getStoredData(key, defaultVal) {
@@ -1270,13 +1269,7 @@
         }
 
         const videos = [
-            { id: 1, title: "ななにーフェラ(第一弾)", url: "https://www.image2url.com/r2/default/videos/1784213397688-af6d8bfb-795e-475d-a8c6-519174f68dd1.mov", thumbnail: "https://cdn.phototourl.com/member/2026-07-16-ab50a087-53db-4cd3-b6a5-d459a3ade2da.jpg", duration: "0:37", date: "2026/06/29", desc: "Xで公開された動画。\n#フェラ #イラマチオ #エロ #なな #ななにー " },
-            { id: 2, title: "ななにー性行為(第二弾)", url: "https://conventional-indigo-13nr34rd.edgeone.dev/na-na-ni--ha-me_1080p.mp4", thumbnail: "https://cdn.phototourl.com/member/2026-07-11-5709d52d-c53e-498c-b7f8-1512dd67a968.jpg", duration: "0:44", date: "2026/06/29", desc: "Xで公開された動画。\n #セックス #生セックス #生ハメ #エロ #なな #ななにー " },
-            { id: 3, title: "ななにーフェラ(第三弾)", url: "https://https://www.image2url.com/r2/default/videos/1784213525469-a6660d3d-006b-41a9-a9b2-8958cdaeeee7.mov", thumbnail: "https://cdn.phototourl.com/member/2026-07-16-285f93d7-c920-4a9a-ba32-06317762dd63.jpg", duration: "0:46", date: "2026/06/29", desc: "Xで公開された動画。\n#フェラ #イラマチオ #エロ #なな #ななにー " },
-            { id: 4, title: "ななにーフェラ(第四弾)", url: "https://www.image2url.com/r2/default/videos/1784213759316-b6e8f90f-8e9a-479d-8d58-0d3155f217fa.mov", thumbnail: "https://cdn.phototourl.com/member/2026-07-16-8eedc238-8262-4e67-9fb7-bb8ee0714e74.jpg", duration: "0:59", date: "2026/07/02", desc: "Xで公開された動画。\n#フェラ #イラマチオ #エロ #なな #ななにー " },
-            { id: 5, title: "ななにー性行為(第五弾)", url: "https://www.image2url.com/r2/default/videos/1784213832613-42bbd4e5-8e91-4c92-9b2b-3c44fc03a803.mov", thumbnail: "https://cdn.phototourl.com/member/2026-07-16-4ea4edff-7f19-4df2-bfcb-b294c3630107.jpg", duration: "0:50", date: "2026/07/02", desc: "Xで公開された動画。\n#セックス #生セックス #生ハメ #エロ #なな #ななにー " },
-            { id: 6, title: "ななにー自慰行為(第六弾)", url: "https://www.image2url.com/r2/default/videos/1782970515631-39b8a062-bd1a-403c-958b-b63cf5002128.mov", thumbnail: "https://cdn.phototourl.com/member/2026-07-11-bf39b3a1-4e1e-4894-b958-dce88cb33a83.jpg", duration: "3:03", date: "2026/07/02", desc: "Xで公開された動画。\n#おなにー #自慰行為 #エロ #なな #ななにー " },
-            { id: 7, title: "ななにー鏡(第七弾)", url: "https://www.image2url.com/r2/default/videos/1784215248922-fe10a368-c4f8-4591-9cbf-98863f89af72.mov", thumbnail: "https://cdn.phototourl.com/member/2026-07-16-a28ca79e-cf43-42fa-be69-33de507c003d.jpg", duration: "0:27", date: "2026/07/17", desc: "Xで公開された動画。\n#おなにー #自慰行為 #エロ #なな #ななにー " }
+            { id: 1, title: "jkおなにー", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(9).mp4", thumbnail: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/IMG_6898.jpeg", duration: "0:37", date: "2026/06/29", desc: "管理者がDiscordで購入した動画。\n#女 #女性 #えろ #1人 #jk " }
         ];
 
         let activeId = 1;
@@ -1425,7 +1418,7 @@
         }
 
         async function shareVideo() {
-            const finalShareUrl = `https://minecraft-jp.github.io/Nanani-URL-Shortener/?v=${activeId}`;
+            const finalShareUrl = `https://minecraft-jp.github.io/Sirouto/`;
             if (navigator.share) {
                 try {
                     await navigator.share({ title: "ななにー流出", text: "ななにー流出", url: finalShareUrl });
