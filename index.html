@@ -854,7 +854,9 @@
 
         const externalLinks = [
              { no: 1, title: "ななにー", url: "https://minecraft-jp.github.io/Nanani-URL-Shortener/", icon: "", color: "white", borderColor: "#ec4899" },
-           { no: 2, title: "素人", url: "https://minecraft-jp.github.io/Sirouto/", icon: "", color: "white", borderColor: "#ec4899" }
+           { no: 2, title: "素人", url: "https://minecraft-jp.github.io/Sirouto/", icon: "", color: "white", borderColor: "#ec4899" },
+           { no: 3, title: "Discord", url: "https://minecraft-jp.github.io/Sirouto/", icon: "", color: "white", borderColor: "#ec4899" },
+           { no: 4, title: "ダンス", url: "https://minecraft-jp.github.io/Sirouto/", icon: "", color: "white", borderColor: "#ec4899" }
         ];
 
         function getStoredData(key, defaultVal) {
@@ -1269,17 +1271,17 @@
         }
 
         const videos = [
-            { id: 1, title: "Jcおなにー(第一弾)", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(9).mp4", thumbnail: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/IMG_6924.png", duration: "0:26", date: "2026/07/28", desc: "管理者がDiscordで購入した動画。\n#女性 #えろ #1人 #jk #1 " },
-            { id: 2, title: "Jcおなにー(第二弾)", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(8).mp4",
+            { id: 1, type:"video", title: "Jcおなにー(第一弾)", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(9).mp4", thumbnail: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/IMG_6924.png", duration: "0:26", date: "2026/07/28", desc: "管理者がDiscordで購入した動画。\n#女性 #えろ #1人 #jk #1 " },
+            { id: 2, type:"video", title: "Jcおなにー(第二弾)", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(8).mp4",
 thumbnail: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/IMG_6962.jpeg", duration: "0:41", date: "2026/07/28", desc: "管理者がDiscordで購入した動画。\n#女性 #えろ #1人 #jk #2 " },
-            { id: 3, title: "Jcおなにー(第三弾)", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(7).mp4", thumbnail: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/IMG_6931.png", duration: "2:20", date: "2026/07/28", desc: "管理者がDiscordで購入した動画。\n#女性 #えろ #1人 #jk #3 " },
-            { id: 4, title: "jkおなにー(第四弾)", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(6).mp4", thumbnail: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/IMG_6981.jpeg", duration: "1:04", date: "2026/07/29", desc: "管理者がDiscordで購入した動画。\n#女性 #えろ #1人 #jk #4 " },
-            { id: 5, title: "jkおなにー(第五弾)", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(5).mp4", thumbnail: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/IMG_6982.png", duration: "1:02", date: "2026/07/29", desc: "管理者がDiscordで購入した動画。\n#女性 #えろ #1人 #jk #5 " },
-            { id: 6, title: "Jcおなにー(第六弾)", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(4).mp4", thumbnail: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/IMG_6983.jpeg", duration: "0:31", date: "2026/07/29", desc: "管理者がDiscordで購入した動画。\n#女性 #えろ #1人 #jk #6 " },
-            { id: 7, title: "jkおなにー(第七弾)", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(3).mp4", thumbnail: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/IMG_6985.jpeg", duration: "2:44", date: "2026/07/30", desc: "管理者がDiscordで購入した動画。\n#女性 #えろ #1人 #jk #7 " },            
-{ id: 8, title: "Jcおなにー(第八弾)", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(2).mp4", thumbnail: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/IMG_6995.jpeg", duration: "1:39", date: "2026/07/30", desc: "管理者がDiscordで購入した動画。\n#女性 #えろ #1人 #jk #8 " },
-            { id: 9, title: "jkおなにー(第九弾)", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(10).mp4", thumbnail: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/IMG_6996.jpeg", duration: "2:20", date: "2026/07/30", desc: "管理者がDiscordで購入した動画。\n#女性 #えろ #1人 #jk #9 " },
-            { id: 10, title: "jkおなにー(第十弾)", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(1).mp4", thumbnail: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/IMG_6997.png", duration: "0:32", date: "2026/07/30", desc: "管理者がDiscordで購入した動画。\n#女性 #えろ #1人 #jk #10 " }
+            { id: 3, type:"video", title: "Jcおなにー(第三弾)", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(7).mp4", thumbnail: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/IMG_6931.png", duration: "2:20", date: "2026/07/28", desc: "管理者がDiscordで購入した動画。\n#女性 #えろ #1人 #jk #3 " },
+            { id: 4, type:"video", title: "jkおなにー(第四弾)", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(6).mp4", thumbnail: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/IMG_6981.jpeg", duration: "1:04", date: "2026/07/29", desc: "管理者がDiscordで購入した動画。\n#女性 #えろ #1人 #jk #4 " },
+            { id: 5, type:"video", title: "jkおなにー(第五弾)", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(5).mp4", thumbnail: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/IMG_6982.png", duration: "1:02", date: "2026/07/29", desc: "管理者がDiscordで購入した動画。\n#女性 #えろ #1人 #jk #5 " },
+            { id: 6, type:"video", title: "Jcおなにー(第六弾)", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(4).mp4", thumbnail: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/IMG_6983.jpeg", duration: "0:31", date: "2026/07/29", desc: "管理者がDiscordで購入した動画。\n#女性 #えろ #1人 #jk #6 " },
+            { id: 7, type:"video", title: "jkおなにー(第七弾)", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(3).mp4", thumbnail: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/IMG_6985.jpeg", duration: "2:44", date: "2026/07/30", desc: "管理者がDiscordで購入した動画。\n#女性 #えろ #1人 #jk #7 " },            
+            { id: 8, type:"video", title: "Jcおなにー(第八弾)", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(2).mp4", thumbnail: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/IMG_6995.jpeg", duration: "1:39", date: "2026/07/30", desc: "管理者がDiscordで購入した動画。\n#女性 #えろ #1人 #jk #8 " },
+            { id: 9, type:"video", title: "jkおなにー(第九弾)", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(10).mp4", thumbnail: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/IMG_6996.jpeg", duration: "2:20", date: "2026/07/30", desc: "管理者がDiscordで購入した動画。\n#女性 #えろ #1人 #jk #9 " },
+            { id: 10, type:"video", title: "jkおなにー(第十弾)", url: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/a1%20(1).mp4", thumbnail: "https://github.com/Minecraft-jp/Haha/raw/refs/heads/main/IMG_6997.png", duration: "0:32", date: "2026/07/30", desc: "管理者がDiscordで購入した動画。\n#女性 #えろ #1人 #jk #10 " }
         ];
 
         let activeId = 1;
